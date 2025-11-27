@@ -24,6 +24,7 @@ public class Produit implements Serializable {
     private String marque;
     private String couleur;
     private String matiere;
+    private int stock;
     @Enumerated(EnumType.STRING)
     private GenreVetements genre;
     @Enumerated(EnumType.STRING)

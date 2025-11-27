@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.io.Serializable;
+import java.time.LocalDateTime;
 import java.util.Date;
 
 @Entity
@@ -17,8 +18,8 @@ import java.util.Date;
 public class Paiement implements Serializable {
     @Id
     private int id;
-    private Long montant;
-    private Date datepaiement;
+    private double montant;
+    private LocalDateTime datepaiement;
     private String modepaiement;
     @Enumerated(EnumType.STRING)
     private StatusPaiement statuspaiement;
