@@ -22,8 +22,7 @@ public class Commande implements Serializable {
     private Date datecommande;
     @Enumerated(EnumType.STRING)
     private StatusCommande statuscommande;
-    @ManyToOne
-    private Panier panier;
+
     @OneToOne
     private Paiement paiement;
     @OneToOne
