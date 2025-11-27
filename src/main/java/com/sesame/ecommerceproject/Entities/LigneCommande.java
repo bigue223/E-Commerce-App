@@ -18,8 +18,11 @@ public class LigneCommande implements Serializable {
     private Long id;
     private Long prixunitaire;
     private  Long Quantite;
+
     @ManyToOne
     private Commande commande;
     @OneToOne
     private Produit produit;
+    @ManyToOne()
+    private Panier panier;
 }

@@ -23,5 +23,6 @@ public class Panier implements Serializable {
     @OneToOne(mappedBy = "panier")
     private Client client;
     @OneToMany(mappedBy = "panier")
-    private List<Commande> commandes;
+    private List<LigneCommande>  ligneCommandes;
+
 }
