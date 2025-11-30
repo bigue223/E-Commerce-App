@@ -1,10 +1,7 @@
 package com.sesame.ecommerceproject.Services;
 
 import com.sesame.ecommerceproject.Entities.*;
-import com.sesame.ecommerceproject.Repository.IClientRepository;
-import com.sesame.ecommerceproject.Repository.ICommandeRepository;
-import com.sesame.ecommerceproject.Repository.IPaiementRepository;
-import com.sesame.ecommerceproject.Repository.IPanierRepository;
+import com.sesame.ecommerceproject.Repository.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -22,6 +19,8 @@ public class CommandeServiceImpl implements CommandeService {
     IPanierRepository iPanierRepository;
     @Autowired
     IPaiementRepository iPaiementRepository;
+    @Autowired
+    IProduitRepository iProduitRepository;
     @Override
     public Commande checkout(int clientID, String modepaiement){
         Client client = iClientRepository.findById(clientID).get();
@@ -35,7 +34,15 @@ public class CommandeServiceImpl implements CommandeService {
         commande.setStatuscommande(StatusCommande.En_Attente);
         double total=0;
         for(LigneCommande l1:panier.getLigneCommandes()){
+            Produit  produit=iProduitRepository.findById(l1.getProduit().getId()).get();
+            if(produit.getStock()<l1.getProduit().getStock()){
+                throw new RuntimeException("Stock insuffisant");
+            }
+            produit.setStock(produit.getStock()-l1.getProduit().getStock());
+            iProduitRepository.save(produit);
             LigneCommande l=new LigneCommande();
+
+
             l.setProduit(l1.getProduit());
             l.setQuantite(l1.getQuantite());
             l.setPrixunitaire(l1.getPrixunitaire());
@@ -43,6 +50,7 @@ public class CommandeServiceImpl implements CommandeService {
             commande.getLignesDeCommande().add(l);
             total+=l.getQuantite()*l.getPrixunitaire();
             commande.setTotal(total);
+
 
         }
         Paiement  paiement = new Paiement();
@@ -52,6 +60,7 @@ public class CommandeServiceImpl implements CommandeService {
         paiement.setStatuspaiement(StatusPaiement.En_Attente);
         paiement.setDatepaiement(LocalDateTime.now());
         panier.getLigneCommandes().clear();
+
         iPaiementRepository.save(paiement);
         icommandeRepository.save(commande);
         iPanierRepository.save(panier);
