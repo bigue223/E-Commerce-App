@@ -1,35 +1,35 @@
 package com.sesame.ecommerceproject.Entities;
 
+import jakarta.annotation.Nonnull;
+import jakarta.annotation.Nullable;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import lombok.*;
 
 import java.io.Serializable;
 import java.util.List;
 
 @Entity
-@Getter
-@Setter
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Produit implements Serializable {
+public class Produit {
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
+    @NotNull
     private Long quantite;
-    private Long prix;
+    @NotNull
+    private float prix;
+    @NotBlank
     private  String nom;
+    @NotBlank
     private  String description;
-    private String marque;
-    private String couleur;
-    private String matiere;
-    private int stock;
     @Enumerated(EnumType.STRING)
     private GenreVetements genre;
     @Enumerated(EnumType.STRING)
     private TailleVetements taille;
-
     @OneToOne(mappedBy = "produit")
     private LigneCommande ligneCommande;
     @ManyToOne

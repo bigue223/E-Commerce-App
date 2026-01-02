@@ -1,7 +1,8 @@
-package com.sesame.ecommerceproject.Services;
+package com.sesame.ecommerceproject.ServiceImplementation;
 
 import com.sesame.ecommerceproject.Entities.Categorie;
 import com.sesame.ecommerceproject.Repository.ICategorieRepository;
+import com.sesame.ecommerceproject.Services.CategorieService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -22,12 +23,12 @@ public class CategorieServiceImpl implements CategorieService {
         return icategorieRepository.save(categorie);
     }
     @Override
-    public void  deleteCategorie(Categorie categorie) {
-        icategorieRepository.delete(categorie);
+    public void  deleteCategorie(int id) {
+        icategorieRepository.deleteById(id);
     }
     @Override
     public Categorie getCategorieById(int id) {
-        return icategorieRepository.getOne(id);
+        return icategorieRepository.findById(id).get();
     }
     @Override
     public List<Categorie> getAllCategorie(){

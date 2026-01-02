@@ -8,6 +8,6 @@ public interface CategorieService {
     Categorie ajouterCategorie(Categorie categorie);
     List<Categorie> getAllCategorie();
     Categorie updateCategorie(Categorie categorie);
-    void deleteCategorie(Categorie categorie);
+    void deleteCategorie(int id);
     Categorie getCategorieById(int id);
 }

@@ -1,6 +1,7 @@
 package com.sesame.ecommerceproject.Entities;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -19,9 +20,10 @@ import java.util.List;
 @NoArgsConstructor
 public class Commande implements Serializable {
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
-    private String etat;
-    private LocalDateTime datecommande;
+
+    private Date datecommande;
     private double total;
     @Enumerated(EnumType.STRING)
     private StatusCommande statuscommande;

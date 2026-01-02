@@ -1,7 +1,8 @@
-package com.sesame.ecommerceproject.Services;
+package com.sesame.ecommerceproject.ServiceImplementation;
 
 import com.sesame.ecommerceproject.Entities.Produit;
 import com.sesame.ecommerceproject.Repository.IProduitRepository;
+import com.sesame.ecommerceproject.Services.ProduitService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

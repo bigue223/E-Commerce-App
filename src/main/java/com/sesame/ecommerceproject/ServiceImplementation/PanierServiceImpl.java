@@ -1,4 +1,4 @@
-package com.sesame.ecommerceproject.Services;
+package com.sesame.ecommerceproject.ServiceImplementation;
 
 import com.sesame.ecommerceproject.Entities.Client;
 import com.sesame.ecommerceproject.Entities.LigneCommande;
@@ -7,6 +7,7 @@ import com.sesame.ecommerceproject.Entities.Produit;
 import com.sesame.ecommerceproject.Repository.IClientRepository;
 import com.sesame.ecommerceproject.Repository.IPanierRepository;
 import com.sesame.ecommerceproject.Repository.IProduitRepository;
+import com.sesame.ecommerceproject.Services.PanierService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -28,7 +29,7 @@ public class PanierServiceImpl  implements PanierService {
         LigneCommande  ligneCommande = new LigneCommande();
         ligneCommande.setProduit(produit);
         ligneCommande.setQuantite(quantite);
-        ligneCommande.setPrixunitaire(produit.getPrix());
+        ligneCommande.setPrixunitaire( produit.getPrix());
         ligneCommande.setPanier(panier);
         panier.getLigneCommandes().add(ligneCommande);
         return ipanierRepository.save(panier);

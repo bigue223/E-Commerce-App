@@ -16,7 +16,7 @@ import java.io.Serializable;
 public class LigneCommande implements Serializable {
     @Id
     private Long id;
-    private Long prixunitaire;
+    private float prixunitaire;
     private  Long Quantite;
 
     @ManyToOne
